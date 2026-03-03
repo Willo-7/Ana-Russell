@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar with Background Video</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Video Container */
+   .video-bg {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh; /* only takes 60% of screen height */
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps full coverage, less cropped visually */
+}
+
+
+    /* Overlay to darken video slightly for readability */
+    .video-bg::after {
+      content: "";
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background: rgba(0,0,0,0.3); /* Adjust opacity for contrast */
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background-color: rgba(250, 249, 246, 0.85); /* pastel white + transparency */
+      backdrop-filter: blur(10px); /* glass effect */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #009A4D;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      color: #333;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background-color: #009A4D;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #009A4D;
+    }
+
+    .nav-links li a:hover::after {
+      width: 100%;
+    }
+
+    .reservation-btn {
+      padding: 10px 20px;
+      background-color: #009A4D;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .reservation-btn:hover {
+      background-color: #007a3c;
+      transform: translateY(-2px);
+    }
+
+    /* Optional: page content spacing */
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 200px 20px 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="2953968ecf7d41e6a227ea5ad946bc1d (1).mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">LOGO</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a class="reservation-btn" href="#">Reservations</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="content">
+    <h1>Welcome to Our Site</h1>
+    <p>Elegant design with a classy background video.</p>
+  </div>
+
+</body>
+</html>

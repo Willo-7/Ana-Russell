@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARE - Strategic Communication</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Crimson+Text:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & base */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Lato', sans-serif; background:#f2f2f2; color:#1f513f; line-height:1.6; }
+    a { text-decoration:none; color:inherit; }
+
+@font-face {
+  font-family:Crim ;
+  src: url(CrimsonText-Regular.ttf);
+}
+
+@font-face {
+  font-family:Lato ;
+  src: url(Lato-Regular.ttf);
+}
+
+
+
+
+
+    
+    /* Navbar */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 999;
+  transition: 0.3s;
+  
+  color: #f5f5f5;
+}
+
+nav.scrolled {
+  background: #EFEFEF;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3); /* 👈 stronger shadow on scroll */
+}
+.nav-links a {
+  font-weight: 700;
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-family: Crim;
+}
+
+.nav-links a:hover {
+  transform: scale(1.15); /* 👈 grows a little bigger */
+  color: #14412f; /* your hover color */
+}
+
+
+    .logo img { height:50px; }
+    .nav-links { display:flex; gap:30px; align-items:center; }
+    .nav-links a { font-weight:700; transition:0.3s; font-family: Crim;}
+    .nav-links a:hover { color:#14412f; }
+    .social-icons { display:flex; gap:20px; }
+    .social-icons a { font-size:1.2rem; transition:0.3s; }
+    .social-icons a:hover { color:#14412f; }
+
+    /* Hero Section */
+    .hero {
+      position:relative;
+      min-height:90vh;
+      display:flex; justify-content:center; align-items:center;
+      padding:0 20px; text-align:center; color:#fff;
+    }
+    .hero::before {
+      content:"";
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.4);
+      z-index: 0;
+    }
+    .hero .hero-content {
+      position:relative; max-width:800px; z-index:1;
+    }
+    .hero .hero-content p { font-size:1.2rem; margin-bottom:20px; }
+    .hero .reserve-btn {
+      background:#009A4D; color:#fff; padding:12px 24px;
+      border-radius:8px; transition:0.3s; display:inline-block;
+    }
+    .hero .reserve-btn:hover { background:#ffffff;color: #1A1A1A; }
+
+    /* Video Background */
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90vh; /* same as hero min-height */
+  overflow: hidden;
+  z-index: 0;
+}
+
+.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills the hero section without distortion */
+}
+
+.video-bg .video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4); /* same overlay as before for readability */
+  z-index: 1;
+}
+
+/* Adjust hero content */
+.hero .hero-content {
+  position: relative;
+  z-index: 2; /* on top of video + overlay */
+}
+
+    /* Principles Overlay */
+    .principles-section {
+      position:absolute; top:95%; left:50%; transform:translate(-50%, -50%);
+      width:95%; display:flex; flex-wrap:wrap; justify-content:space-around; gap:20px;
+      padding:40px 20px;
+  
+      backdrop-filter: blur(12px);
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(31,81,63,0.15);
+      z-index:2;
+    }
+    .principle-box {
+      background: #ffffff;
+      flex: 1 1 200px; min-width:220px;
+      padding:30px 20px; border-radius:15px;
+      text-align:center; box-shadow:0 10px 25px rgba(31,81,63,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .principle-box:hover { transform:translateY(-5px); box-shadow:0 15px 30px rgba(31,81,63,0.3);; }
+    .principle-box h3 { margin-bottom:10px; font-size:1.3rem; color: #009A4D; }
+    .principle-box p { font-weight:400; color: #1A1A1A; }
+
+    /* Events Section */
+    .events-section { padding:140px 20px 60px; max-width:1200px; margin:0 auto; }
+    .events-section h2 { font-family:'Crimson Text', serif; font-size:2.5rem; margin-bottom:40px; text-align:center;margin-left:-825px }
+    .events-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; }
+    .event-card { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.1); display:flex; flex-direction:column; }
+    .event-card img { width:100%; height:200px; object-fit:cover; }
+    .event-card .event-info { padding:20px; }
+    .event-card .event-info h3 { font-family:'Crimson Text', serif; margin-bottom:10px; }
+    .event-card .event-info p { color:#555; margin-bottom:8px; }
+    .event-card .reserve-ctn { margin-top:10px; display:inline-block; background:#009A4D; color:#fff; padding:8px 16px; border-radius:6px; transition:0.3s; }
+    .event-card .reserve-ctn:hover { background: #030111;color: #ffffff; }
+
+    /* About & Sponsors */
+  .about-sponsors {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* left and right columns */
+  gap: 40px;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+   margin-top: 80px;
+}
+
+.about-column {
+  /* left column stays at top */
+}
+
+.sponsors-column {
+  /* right column starts lower */
+  align-self: start;
+  margin-top: 250px; /* adjust how much lower you want */
+}
+
+.about-column h2,
+.sponsors-column h2 {
+  font-family: 'Crimson Text', serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #090909;
+}
+
+.about-column p {
+  font-size: 1.1rem;
+  color: #2d2d2d;
+  line-height: 1.6;
+}
+
+.sponsors-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sponsors-logos img {
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: 0.3s;
+}
+
+.sponsors-logos img:hover {
+  filter: grayscale(0%);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .about-sponsors {
+    grid-template-columns: 1fr;
+  }
+  .sponsors-column {
+    margin-top: 40px; /* smaller gap on mobile */
+  }
+}
+
+    /* Team Section */
+    .team-section { padding:60px 20px; max-width:1200px; margin:0 auto; text-align:center; margin-top: 80px; }
+    .team-section h2 { font-family:'Crimson Text', serif; font-size:2.5rem; margin-bottom:40px; color:#14412f; }
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:30px; }
+    .team-card { background:#fff; border-radius:15px; padding:20px; box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+    .team-card img { width:100%; border-radius:50%; height:220px; object-fit:cover; margin-bottom:15px; }
+    .team-card h3 { font-family:'Crimson Text', serif; margin-bottom:10px; }
+    .team-card p { color:#555; font-size:1rem; }
+
+
+    .subscribe-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f5f5f5; /* soft background */
+}
+
+.subscribe-section h2 {
+  font-size: 2rem;
+  color: #14412f;
+  margin-bottom: 15px;
+  font-family: 'Crimson Text', serif;
+}
+
+.subscribe-section p {
+  font-size: 1.1rem;
+  color: #1f513f;
+  margin-bottom: 30px;
+}
+
+.subscribe-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.subscribe-form input {
+  padding: 12px 15px;
+  border: 2px solid #14412f;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-width: 250px;
+}
+
+.subscribe-form button {
+  background: #14412f;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.subscribe-form button:hover {
+  background: #009A4D; /* green hover */
+}
+
+
+    /* Footer */
+    footer { background:#009A4D; text-align:center; padding:30px 20px; color:#ffffff; }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .hero p { font-size:1rem; }
+      .principle-box { flex:0 1 80%; }
+      .about-sponsors { flex-direction:column; text-align:center; align-items:center; }
+      .sponsors-logos { justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="about.html">About</a>
+      <a href="calender.html">Calendar</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="Reservation.html">Reservations</a>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </nav>
+
+ 
+
+    <!-- Hero Section -->
+<section class="hero">
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="2953968ecf7d41e6a227ea5ad946bc1d (2).mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <p>Our mission is to expertly manage communication between businesses, organizations, and their audiences. We develop strategic communication plans that include research, coordination, implementation, and evaluation to build and maintain the reputation and credibility of our clients.</p>
+    <a href="#" class="reserve-btn">Learn More</a>
+  </div>
+
+  <!-- Principles Overlay -->
+  <section class="principles-section">
+    <div class="principle-box">
+      <h3>Credibility</h3>
+      <p>Building trust through honesty and transparency in every message.</p>
+    </div>
+    <div class="principle-box">
+      <h3>Strategy</h3>
+      <p>Planning communication with clear goals and tailored approaches.</p>
+    </div>
+    <div class="principle-box">
+      <h3>Creativity</h3>
+      <p>Delivering unique ideas that engage and inspire audiences.</p>
+    </div>
+    <div class="principle-box">
+      <h3>Impact</h3>
+      <p>Ensuring every effort drives meaningful results and lasting change.</p>
+    </div>
+  </section>
+</section>
+
+
+  <!-- Events -->
+  <section class="events-section">
+    <h2>Upcoming Events</h2>
+    <div class="events-grid">
+      <div class="event-card">
+        <img src="pic.jpg" alt="Event 1">
+        <div class="event-info">
+          <h3>4To Ecuentro Comunicadoras NY </h3>
+          <p>Date: September 6, 2025</p>
+          <a href="#" class="reserve-ctn">Learn More</a>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="FACES invite -English (1).jpg" alt="Event 2">
+        <div class="event-info">
+          <h3>Latin Women Empoweres Faces</h3>
+          <p>Date: September 15, 2025</p>
+          <a href="#" class="reserve-ctn">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About & Sponsors -->
+  <section class="about-sponsors">
+    <div class="about-column">
+      <h2>About ARE</h2>
+      <p>ARE is a strategic communication firm dedicated to helping businesses and organizations effectively connect with their audiences. We specialize in research, planning, implementation, and evaluation to maintain and enhance client reputation and drive meaningful results.</p>
+    </div>
+    <div class="sponsors-column">
+      <h2>Our Sponsors</h2>
+      <div class="sponsors-logos">
+        <img src="sponsor1.png" alt="Sponsor 1">
+        <img src="sponsor2.png" alt="Sponsor 2">
+        <img src="sponsor3.png" alt="Sponsor 3">
+        <img src="sponsor4.png" alt="Sponsor 4">
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="team1.jpg" alt="Team Member 1">
+        <h3>Ana Russell</h3>
+        <p>CEO & Founder of ARussell Enterprises LLC, Ana brings 20+ years of community-focused experience, along with a natural talent for public relations and event planning.</p>
+      </div>
+      <div class="team-card">
+        <img src="team2.jpg" alt="Team Member 2">
+        <h3>Xiomara Taveras</h3>
+        <p>Journalist, author and entrepeneur.A women with the ability to turn any word into poetry. Founder of Encuentro Communicadoras NY and Educacion Cazada </p>
+      </div>
+      <div class="team-card">
+        <img src="team3.jpg" alt="Team Member 3">
+        <h3>Angie Jerez</h3>
+        <p>Actor, Entrepeneur, TV Host and Philanthropist, with over 15 years of experience in the entertainment industry, Ms.Jerez is a complete Artist.</p>
+      </div>
+      <div class="team-card">
+        <img src="team4.jpg" alt="Team Member 4">
+        <h3>Jennifer Mercedes</h3>
+        <p>TV Host, Producer, and Content Creaor, Known as La Chica Deportes. Jennifer has established herself as one of the leaders in laino sports media</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscribe Section -->
+<section class="subscribe-section">
+  <h2>Subscribe to our mailing list</h2>
+  <p>Never miss a date — get the latest updates straight to your inbox.</p>
+  <form class="subscribe-form">
+    <input type="email" placeholder="Enter your email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+
+
+
+
+  <footer>
+    &copy; 2025 ARE - Strategic Communication
+  </footer>
+
+</body>
+</html>

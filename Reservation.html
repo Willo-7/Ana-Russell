@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation | ARE</title>
+  <style>
+    /* Reset + Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+/* Navbar */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff; /* Solid white background */
+  color: #1a1a1a;     /* Text color */
+  z-index: 999;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1a1a1a; /* Makes links dark instead of blue */
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #009A4D; /* hover green */
+}
+
+
+
+    .logo img { height:50px; }
+    .nav-links { display:flex; gap:30px; align-items:center; }
+    .nav-links a { font-weight:700; transition:0.3s; font-family: Crim;}
+    .nav-links a:hover { color:#14412f; }
+    .social-icons { display:flex; gap:20px; }
+    .social-icons a { font-size:1.2rem; transition:0.3s; }
+    .social-icons a:hover { color:#14412f; }
+
+
+    /* Hero */
+    .hero {
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('pattern-1962877_1280.png') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      text-shadow: 0px 4px 20px rgba(0,0,0,0.7);
+    }
+
+    /* Reservation Section */
+    .reservation-section {
+      padding: 100px 20px;
+      background: linear-gradient(to right, #f0f7f2, #ffffff);
+      text-align: center;
+    }
+
+    .reservation-container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 50px;
+      border-radius: 15px;
+      box-shadow: 0px 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .reservation-container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #14412f;
+    }
+
+    .reservation-container p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: #1f513f;
+    }
+
+    .reservation-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .reservation-form .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reservation-form input,
+    .reservation-form select {
+      padding: 15px;
+      border: 2px solid #14412f;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .reservation-form input:focus,
+    .reservation-form select:focus {
+      border-color: #009A4D;
+      box-shadow: 0px 0px 8px rgba(0,154,77,0.3);
+    }
+
+    .reservation-form button {
+      grid-column: span 2;
+      background: #14412f;
+      color: #fff;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .reservation-form button:hover {
+      background: #009A4D;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .reservation-form {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #14412f;
+      color: #fff;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="calender.html">Calendar</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="Reservation.html">Reservations</a>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </nav>
+
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Reserve Your Spot</h1>
+  </section>
+
+  <!-- Reservation Section -->
+  <section class="reservation-section">
+    <div class="reservation-container">
+      <h2>Event Registration</h2>
+      <p>Register for one of our upcoming events.</p>
+
+      <form class="reservation-form">
+        <div class="form-group">
+          <input type="text" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <select required>
+            <option value="">Select Event</option>
+            <option>4To Encuentro Comunicadoras NY</option>
+            <option>Encuentro Educacion Cazada</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="number" placeholder="Number of Guests" min="1" required>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 ARE. All Rights Reserved.</p>
+  </footer>
+
+
+  
+</body>
+</html>
