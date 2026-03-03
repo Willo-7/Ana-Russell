@@ -3,276 +3,568 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ARE - Photo Gallery</title>
-
-  <!-- Fonts + Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <title>Gallery — ARE Strategic Communication</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --green-dark: #0d3d2b;
+      --green-mid: #1a5c41;
+      --green-vivid: #009A4D;
+      --green-light: #d4ede0;
+      --cream: #f7f5f0;
+      --off-white: #efefeb;
+      --ink: #131310;
+      --muted: #5a5a52;
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Lato', sans-serif;
-      background-color: #FDFCF8;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
       overflow-x: hidden;
     }
 
-    h1, h2 {
-      font-family: 'Cinzel', serif;
-    }
+    a { text-decoration: none; color: inherit; }
 
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: transparent;
-      padding: 15px 40px;
-      z-index: 999;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    nav.scrolled {
-      background-color: #F4F1EC;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo img {
-      height: 50px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      color: #1a1a1a;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #ffcc00;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .social-icons a {
-      color: #1F513F;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-    }
-
-    .social-icons a:hover {
-      color: #ffcc00;
-    }
-
-    .gallery-header {
-      padding-top: 120px;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .gallery-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      color: #1F513F;
-      font-weight: 900;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto 100px;
-      padding: 0 20px;
-    }
-
-    .gallery-item {
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      text-align: center;
-    }
-
-    .gallery-image {
-      width: 100%;
-      padding-top: 70%;
-      background-size: cover;
-      background-position: center;
-      border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .gallery-item:hover {
-      transform: scale(1.03);
-    }
-
-    .gallery-caption {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #1F513F;
-      font-weight: 500;
-      font-family: 'Playfair Display', serif;
-    }
-
-    footer {
-      background-color: #D9EAD3;
-      color: #333;
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.9rem;
-    }
-
-    /* Lightbox styles */
-    .lightbox {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
+      padding: 18px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(247,245,240,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08), 0 6px 24px rgba(0,0,0,0.06);
+      padding: 12px 50px;
+    }
+
+    .logo img { height: 46px; object-fit: contain; }
+
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+
+    .nav-links a {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--green-dark);
+      letter-spacing: 0.02em;
+      position: relative;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--green-vivid);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--green-vivid); }
+
+    .social-icons { display: flex; gap: 18px; }
+    .social-icons a {
+      font-size: 1rem;
+      color: var(--green-dark);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .social-icons a:hover { color: var(--green-vivid); transform: translateY(-2px); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      padding: 140px 40px 80px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,154,77,0.25), transparent 60%);
+    }
+
+    .page-hero .hero-inner { position: relative; z-index: 1; }
+
+    .page-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      border: 1px solid rgba(212,237,224,0.4);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .page-hero h1 em { font-style: italic; color: var(--green-light); }
+
+    .page-hero p {
+      color: rgba(255,255,255,0.72);
+      max-width: 480px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 48px 40px 36px;
+    }
+
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 8px 22px;
+      border-radius: 100px;
+      border: 1.5px solid rgba(13,61,43,0.2);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--green-vivid);
+      color: var(--green-vivid);
+    }
+
+    .filter-btn.active {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+      color: #fff;
+    }
+
+    /* ── MASONRY GALLERY ── */
+    .gallery-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px 100px;
+    }
+
+    .masonry-grid {
+      columns: 3;
+      column-gap: 18px;
+    }
+
+    @media (max-width: 900px) { .masonry-grid { columns: 2; } }
+    @media (max-width: 560px) { .masonry-grid { columns: 1; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 18px;
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 16px 40px rgba(13,61,43,0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    /* Overlay on hover */
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,61,43,0.72) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .overlay-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .overlay-caption {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: #fff;
+      font-style: italic;
+    }
+
+    .overlay-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      color: #fff;
+      font-size: 0.85rem;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
       z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5, 20, 12, 0.92);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
     }
 
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
+    .lightbox.active { opacity: 1; visibility: visible; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 88vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
 
-    .lightbox.active {
-      visibility: visible;
-      opacity: 1;
+    .lightbox-inner img {
+      max-width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      animation: lbIn 0.35s ease both;
     }
 
-    .lightbox::after {
-      content: '×';
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.93); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .lightbox-caption {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    /* Controls */
+    .lb-close {
       position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 3rem;
-      color: white;
+      top: -50px; right: -10px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.1rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lb-close:hover { background: rgba(255,255,255,0.22); }
+
+    .lb-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10001;
+    }
+
+    .lb-nav:hover { background: rgba(255,255,255,0.22); }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 40px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+    }
+
+    footer .footer-logo img { height: 36px; filter: brightness(0) invert(1); opacity: 0.7; }
+    footer .footer-links { display: flex; gap: 24px; }
+    footer .footer-links a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    footer .footer-links a:hover { color: var(--green-vivid); }
+    footer .footer-social { display: flex; gap: 16px; }
+    footer .footer-social a { color: rgba(255,255,255,0.6); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
+    footer .footer-social a:hover { color: var(--green-vivid); transform: translateY(-2px); }
+
+    @media (max-width: 680px) {
+      nav { padding: 14px 24px; }
+      nav.scrolled { padding: 10px 24px; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; align-items: center; }
+      footer .footer-links { flex-wrap: wrap; justify-content: center; }
+      .lb-prev { left: 10px; }
+      .lb-next { right: 10px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- NAV -->
   <nav id="navbar">
-    <div class="nav-inner">
-      <div class="logo">
-        <img src="ARussell logo updated .png" alt="ARE Logo" />
-      </div>
-     <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="calender.html">Calender</a>
-        <a href="Gallery.html">Gallery</a>
-        <a href="Reservation.html">Reservations</a>
-      </div>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-      </div>
+    <div class="logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="calender.html">Calendar</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="Reservation.html">Reservations</a>
+    </div>
+    <div class="social-icons">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
     </div>
   </nav>
 
-  <!-- Header -->
-  <section class="gallery-header">
-    <h2><i class=""></i> Our Photo Gallery</h2>
-  </section>
-
-  <!-- Gallery Grid -->
-  <section class="gallery-grid">
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <div class="gallery-image" style="background-image: url('ecb807d1-6249-4c80-a3b2-3c90cc6aab6b.jpeg');"></div>
-      <div class="gallery-caption"></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <div class="gallery-image" style="background-image: url('89e3d897-fd04-4031-927c-ffa587774058.jpeg');"></div>
-      <div class="gallery-caption"></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <div class="gallery-image" style="background-image: url('eafa6207-f3dc-45aa-9e82-ae59a7b27997.jpeg');"></div>
-      <div class="gallery-caption"></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <div class="gallery-image" style="background-image: url('a3a66ffb-9c36-429e-b7cb-82a846de8c41.jpeg');"></div>
-      <div class="gallery-caption"></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <div class="gallery-image" style="background-image: url('');"></div>
-      <div class="gallery-caption"></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <div class="gallery-image" style="background-image: url('');"></div>
-      <div class="gallery-caption"></div>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Moments & Memories</span>
+      <h1>Our <em>Photo Gallery</em></h1>
+      <p>A curated look at the events, people, and stories that define ARE.</p>
     </div>
   </section>
 
-  <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Enlarged" />
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="events">Events</button>
+    <button class="filter-btn" data-filter="team">Team</button>
+    <button class="filter-btn" data-filter="community">Community</button>
   </div>
 
-  <!-- Footer -->
+  <!-- GALLERY -->
+  <section class="gallery-section">
+    <div class="masonry-grid" id="gallery-grid">
+
+      <div class="gallery-item" data-category="events" data-caption="4to Encuentro Comunicadoras NY" onclick="openLightbox(0)">
+        <img src="ecb807d1-6249-4c80-a3b2-3c90cc6aab6b.jpeg" alt="Encuentro Comunicadoras">
+        <div class="gallery-overlay">
+          <div class="overlay-content">
+            <span class="overlay-caption">Encuentro Comunicadoras</span>
+            <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="community" data-caption="Community Gathering" onclick="openLightbox(1)">
+        <img src="89e3d897-fd04-4031-927c-ffa587774058.jpeg" alt="Community Gathering">
+        <div class="gallery-overlay">
+          <div class="overlay-content">
+            <span class="overlay-caption">Community Gathering</span>
+            <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="events" data-caption="Latin Women Empowered: Faces" onclick="openLightbox(2)">
+        <img src="eafa6207-f3dc-45aa-9e82-ae59a7b27997.jpeg" alt="Latin Women Empowered">
+        <div class="gallery-overlay">
+          <div class="overlay-content">
+            <span class="overlay-caption">Latin Women Empowered</span>
+            <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="team" data-caption="ARE Team Spotlight" onclick="openLightbox(3)">
+        <img src="a3a66ffb-9c36-429e-b7cb-82a846de8c41.jpeg" alt="Team Spotlight">
+        <div class="gallery-overlay">
+          <div class="overlay-content">
+            <span class="overlay-caption">ARE Team Spotlight</span>
+            <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-nav lb-prev" onclick="changeImage(-1)" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <div class="lightbox-inner">
+      <button class="lb-close" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
+      <img id="lightbox-img" src="" alt="">
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+    <button class="lb-nav lb-next" onclick="changeImage(1)" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
-    &copy; 2025 ARE Communications. All rights reserved.
+    <div class="footer-logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="calender.html">Calendar</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="Reservation.html">Reservations</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+    <p style="width:100%; text-align:center; margin-top:10px;">&copy; 2025 ARE — Strategic Communication. All rights reserved.</p>
   </footer>
 
   <script>
+    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 80);
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    function openLightbox(el) {
-      const imgDiv = el.querySelector('.gallery-image');
-      const bg = imgDiv.style.backgroundImage;
-      const url = bg.slice(5, -2); // Remove url("...") wrapper
-      document.getElementById('lightbox-img').src = url;
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.gallery-item').forEach(el => observer.observe(el));
+
+    // Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          const match = filter === 'all' || item.dataset.category === filter;
+          item.style.display = match ? 'block' : 'none';
+        });
+      });
+    });
+
+    // Lightbox
+    let currentIndex = 0;
+    const visibleItems = () => [...document.querySelectorAll('.gallery-item')].filter(el => el.style.display !== 'none');
+
+    function openLightbox(idx) {
+      currentIndex = idx;
+      showImage(currentIndex);
       document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showImage(idx) {
+      const items = visibleItems();
+      if (!items[idx]) return;
+      const img = items[idx].querySelector('img');
+      const caption = items[idx].dataset.caption || '';
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = caption;
+      document.getElementById('lightbox-caption').textContent = caption;
+    }
+
+    function changeImage(dir) {
+      const items = visibleItems();
+      currentIndex = (currentIndex + dir + items.length) % items.length;
+      showImage(currentIndex);
     }
 
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
     }
+
+    // Close on backdrop click
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // Keyboard nav
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'ArrowRight') changeImage(1);
+    });
   </script>
-
-
-
 </body>
 </html>
