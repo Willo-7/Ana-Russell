@@ -84,6 +84,65 @@
     }
     .social-icons a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--green-dark);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--green-dark);
+      padding: 80px 0 24px;
+      z-index: 998;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.9);
+      padding: 14px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--green-vivid); padding-left: 40px; }
+    .mobile-menu a.active { color: var(--green-vivid); }
+    .mobile-menu .mobile-social {
+      display: flex;
+      gap: 20px;
+      padding: 20px 32px 0;
+    }
+    .mobile-menu .mobile-social a {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.6);
+      border: none;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .mobile-menu .mobile-social a:hover { color: var(--green-vivid); }
+
     /* ── PAGE HERO ── */
     .page-hero {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
@@ -178,9 +237,6 @@
       column-gap: 18px;
     }
 
-    @media (max-width: 900px) { .masonry-grid { columns: 2; } }
-    @media (max-width: 560px) { .masonry-grid { columns: 1; } }
-
     .gallery-item {
       break-inside: avoid;
       margin-bottom: 18px;
@@ -189,7 +245,6 @@
       overflow: hidden;
       cursor: pointer;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
@@ -213,7 +268,6 @@
 
     .gallery-item:hover img { transform: scale(1.04); }
 
-    /* Overlay on hover */
     .gallery-overlay {
       position: absolute;
       inset: 0;
@@ -302,7 +356,6 @@
       text-align: center;
     }
 
-    /* Controls */
     .lb-close {
       position: absolute;
       top: -50px; right: -10px;
@@ -365,11 +418,21 @@
     footer .footer-social a { color: rgba(255,255,255,0.6); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
     footer .footer-social a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
-    @media (max-width: 680px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .masonry-grid { columns: 2; }
       nav { padding: 14px 24px; }
       nav.scrolled { padding: 10px 24px; }
+    }
+    @media (max-width: 680px) {
       .nav-links { display: none; }
-      footer { flex-direction: column; text-align: center; align-items: center; }
+      .social-icons { display: none; }
+      .hamburger { display: flex; }
+      .masonry-grid { columns: 1; }
+      .page-hero { padding: 120px 24px 70px; }
+      .filter-bar { padding: 32px 24px 24px; }
+      .gallery-section { padding: 0 16px 70px; }
+      footer { flex-direction: column; text-align: center; align-items: center; padding: 32px 24px; }
       footer .footer-links { flex-wrap: wrap; justify-content: center; }
       .lb-prev { left: 10px; }
       .lb-next { right: 10px; }
@@ -393,7 +456,24 @@
       <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="calender.html">Calendar</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="Reservation.html">Reservations</a>
+    <div class="mobile-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </div>
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -493,6 +573,24 @@
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hamburger / mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
     });
 
     // Scroll reveal

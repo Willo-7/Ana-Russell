@@ -3,169 +3,380 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservation | ARE</title>
+  <title>Reservations — ARE Strategic Communication</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
-    /* Reset + Base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+    :root {
+      --green-dark: #0d3d2b;
+      --green-mid: #1a5c41;
+      --green-vivid: #009A4D;
+      --green-light: #d4ede0;
+      --cream: #f7f5f0;
+      --off-white: #efefeb;
+      --ink: #131310;
+      --muted: #5a5a52;
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background: #f7f7f7;
-      color: #1a1a1a;
-      line-height: 1.6;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
     }
+    a { text-decoration: none; color: inherit; }
 
-    /* Navbar */
-/* Navbar */
-nav {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ffffff; /* Solid white background */
-  color: #1a1a1a;     /* Text color */
-  z-index: 999;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #1a1a1a; /* Makes links dark instead of blue */
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.nav-links a:hover {
-  color: #009A4D; /* hover green */
-}
-
-
-
-    .logo img { height:50px; }
-    .nav-links { display:flex; gap:30px; align-items:center; }
-    .nav-links a { font-weight:700; transition:0.3s; font-family: Crim;}
-    .nav-links a:hover { color:#14412f; }
-    .social-icons { display:flex; gap:20px; }
-    .social-icons a { font-size:1.2rem; transition:0.3s; }
-    .social-icons a:hover { color:#14412f; }
-
-
-    /* Hero */
-    .hero {
-      height: 60vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url('pattern-1962877_1280.png') center/cover no-repeat;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      padding: 18px 50px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 999;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
     }
-
-    .hero h1 {
-      font-size: 3rem;
-      text-shadow: 0px 4px 20px rgba(0,0,0,0.7);
+    nav.scrolled {
+      background: rgba(247,245,240,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08), 0 6px 24px rgba(0,0,0,0.06);
+      padding: 12px 50px;
     }
-
-    /* Reservation Section */
-    .reservation-section {
-      padding: 100px 20px;
-      background: linear-gradient(to right, #f0f7f2, #ffffff);
-      text-align: center;
+    .logo img { height: 46px; object-fit: contain; }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--green-dark);
+      letter-spacing: 0.02em;
+      position: relative;
     }
-
-    .reservation-container {
-      max-width: 700px;
-      margin: auto;
-      background: #fff;
-      padding: 50px;
-      border-radius: 15px;
-      box-shadow: 0px 25px 50px rgba(0,0,0,0.15);
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--green-vivid);
+      transition: width 0.3s ease;
     }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--green-vivid); }
+    .social-icons { display: flex; gap: 18px; }
+    .social-icons a { font-size: 1rem; color: var(--green-dark); transition: color 0.2s, transform 0.2s; }
+    .social-icons a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
-    .reservation-container h2 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #14412f;
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1001;
     }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--green-dark);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .reservation-container p {
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: var(--green-dark);
+      padding: 80px 0 24px;
+      z-index: 998;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
-      margin-bottom: 40px;
-      color: #1f513f;
+      color: rgba(255,255,255,0.9);
+      padding: 14px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--green-vivid); padding-left: 40px; }
+    .mobile-menu a.active { color: var(--green-vivid); }
+    .mobile-menu .mobile-social {
+      display: flex; gap: 20px;
+      padding: 20px 32px 0;
+    }
+    .mobile-menu .mobile-social a {
+      font-size: 1.1rem; color: rgba(255,255,255,0.6);
+      border: none; padding: 0; transition: color 0.2s;
+    }
+    .mobile-menu .mobile-social a:hover { color: var(--green-vivid); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      padding: 150px 40px 90px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,154,77,0.22), transparent 60%);
+    }
+    .page-hero .hero-inner { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green-light);
+      border: 1px solid rgba(212,237,224,0.4);
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 18px;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 16px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--green-light); }
+    .page-hero p {
+      color: rgba(255,255,255,0.72);
+      max-width: 480px; margin: 0 auto; font-size: 1.05rem;
     }
 
-    .reservation-form {
+    /* ── EVENTS STRIP ── */
+    .events-strip {
+      background: var(--off-white);
+      padding: 60px 40px;
+    }
+    .events-strip-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .strip-label {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green-vivid); font-weight: 500;
+      display: block; margin-bottom: 10px;
+    }
+    .strip-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--green-dark); margin-bottom: 36px;
+    }
+    .events-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .event-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .event-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--green-vivid);
+    }
+    .event-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(13,61,43,0.12); }
+    .event-card-date {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-vivid); font-weight: 500; margin-bottom: 10px;
+    }
+    .event-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--green-dark); margin-bottom: 10px;
+    }
+    .event-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+    .event-badge {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 100px;
+    }
+
+    /* ── RESERVATION FORM ── */
+    .reservation-section {
+      padding: 100px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .form-header .section-label {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green-vivid); font-weight: 500;
+      display: block; margin-bottom: 10px;
+    }
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--green-dark); margin-bottom: 12px;
+    }
+    .form-header p { color: var(--muted); font-size: 1rem; }
+
+    .reservation-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 50px 48px;
+      box-shadow: 0 8px 40px rgba(13,61,43,0.1);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
 
-    .reservation-form .form-group {
+    .form-group {
       display: flex;
       flex-direction: column;
+      gap: 7px;
+    }
+    .form-group.full { grid-column: span 2; }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--green-dark);
+      letter-spacing: 0.02em;
     }
 
-    .reservation-form input,
-    .reservation-form select {
-      padding: 15px;
-      border: 2px solid #14412f;
-      border-radius: 8px;
-      font-size: 1rem;
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 13px 16px;
+      border: 1.5px solid rgba(13,61,43,0.2);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
       outline: none;
-      transition: 0.3s;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
 
-    .reservation-form input:focus,
-    .reservation-form select:focus {
-      border-color: #009A4D;
-      box-shadow: 0px 0px 8px rgba(0,154,77,0.3);
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green-vivid);
+      box-shadow: 0 0 0 3px rgba(0,154,77,0.12);
+      background: #fff;
     }
 
-    .reservation-form button {
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-group select { cursor: pointer; }
+
+    .submit-btn {
       grid-column: span 2;
-      background: #14412f;
+      background: var(--green-dark);
       color: #fff;
       padding: 15px;
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 18px rgba(13,61,43,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
     }
-
-    .reservation-form button:hover {
-      background: #009A4D;
+    .submit-btn:hover {
+      background: var(--green-vivid);
       transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,154,77,0.3);
+    }
+    .submit-btn:disabled {
+      opacity: 0.7; cursor: not-allowed; transform: none;
     }
 
-    /* Responsive */
-    @media(max-width: 768px) {
-      .reservation-form {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Footer */
-    footer {
+    /* ── SUCCESS / ERROR STATES ── */
+    .form-message {
+      display: none;
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 0.95rem;
+      margin-top: 20px;
       text-align: center;
-      padding: 30px;
-      background: #14412f;
-      color: #fff;
-      margin-top: 50px;
+    }
+    .form-message.success {
+      display: block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      border: 1px solid rgba(0,154,77,0.3);
+    }
+    .form-message.error {
+      display: block;
+      background: #fdecea;
+      color: #8b1a1a;
+      border: 1px solid rgba(180,30,30,0.2);
+    }
+    .form-message i { margin-right: 8px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 40px 50px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      color: rgba(255,255,255,0.6); font-size: 0.88rem;
+    }
+    footer .footer-logo img { height: 36px; filter: brightness(0) invert(1); opacity: 0.7; }
+    footer .footer-links { display: flex; gap: 24px; }
+    footer .footer-links a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    footer .footer-links a:hover { color: var(--green-vivid); }
+    footer .footer-social { display: flex; gap: 16px; }
+    footer .footer-social a { color: rgba(255,255,255,0.6); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
+    footer .footer-social a:hover { color: var(--green-vivid); transform: translateY(-2px); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 14px 24px; }
+      nav.scrolled { padding: 10px 24px; }
+    }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .social-icons { display: none; }
+      .hamburger { display: flex; }
+      .page-hero { padding: 120px 24px 70px; }
+      .events-strip { padding: 50px 24px; }
+      .reservation-section { padding: 70px 20px; }
+      .reservation-card { padding: 32px 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .submit-btn { grid-column: span 1; }
+      footer { flex-direction: column; text-align: center; align-items: center; padding: 32px 24px; }
+      footer .footer-links { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+
+  <!-- NAV -->
   <nav id="navbar">
     <div class="logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
     <div class="nav-links">
@@ -173,55 +384,239 @@ nav {
       <a href="about.html">About</a>
       <a href="calender.html">Calendar</a>
       <a href="gallery.html">Gallery</a>
-      <a href="Reservation.html">Reservations</a>
+      <a href="Reservation.html" class="active">Reservations</a>
     </div>
     <div class="social-icons">
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="calender.html">Calendar</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="Reservation.html" class="active">Reservations</a>
+    <div class="mobile-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>Reserve Your Spot</h1>
-  </section>
-
-  <!-- Reservation Section -->
-  <section class="reservation-section">
-    <div class="reservation-container">
-      <h2>Event Registration</h2>
-      <p>Register for one of our upcoming events.</p>
-
-      <form class="reservation-form">
-        <div class="form-group">
-          <input type="text" placeholder="Full Name" required>
-        </div>
-        <div class="form-group">
-          <input type="email" placeholder="Email Address" required>
-        </div>
-        <div class="form-group">
-          <select required>
-            <option value="">Select Event</option>
-            <option>4To Encuentro Comunicadoras NY</option>
-            <option>Encuentro Educacion Cazada</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <input type="number" placeholder="Number of Guests" min="1" required>
-        </div>
-        <button type="submit">Register</button>
-      </form>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Join Us</span>
+      <h1>Reserve Your <em>Spot</em></h1>
+      <p>Register for one of our upcoming events and we'll send a confirmation straight to your inbox.</p>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- UPCOMING EVENTS STRIP -->
+  <section class="events-strip">
+    <div class="events-strip-inner">
+      <span class="strip-label">What's Coming Up</span>
+      <h2 class="strip-title">Upcoming Events</h2>
+      <div class="events-cards">
+        <div class="event-card">
+          <div class="event-card-date">September 6, 2025</div>
+          <h3>4to Encuentro Comunicadoras NY</h3>
+          <p>An annual gathering celebrating the voices and achievements of communicators in New York.</p>
+          <span class="event-badge">Open Registration</span>
+        </div>
+        <div class="event-card">
+          <div class="event-card-date">September 15, 2025</div>
+          <h3>Latin Women Empowered: Faces</h3>
+          <p>A powerful evening honoring Latina leaders driving change in business, media, and community.</p>
+          <span class="event-badge">Open Registration</span>
+        </div>
+        <div class="event-card">
+          <div class="event-card-date">Coming Soon</div>
+          <h3>Encuentro Educación Cazada</h3>
+          <p>Stay tuned for details on our next education-focused community encuentro.</p>
+          <span class="event-badge" style="background:#e8e8e4; color:var(--muted);">Announced Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION FORM -->
+  <section class="reservation-section">
+    <div class="form-header">
+      <span class="section-label">Secure Your Seat</span>
+      <h2>Event Registration</h2>
+      <p>Fill out the form below and you'll receive an email confirmation instantly.</p>
+    </div>
+
+    <div class="reservation-card">
+      <form class="form-grid" id="reservationForm">
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Ana" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Russell" required>
+        </div>
+
+        <div class="form-group full">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="form-group full">
+          <label for="event">Select Event</label>
+          <select id="event" name="event" required>
+            <option value="">— Choose an event —</option>
+            <option value="4to Encuentro Comunicadoras NY — September 6, 2025">4to Encuentro Comunicadoras NY — Sept 6</option>
+            <option value="Latin Women Empowered: Faces — September 15, 2025">Latin Women Empowered: Faces — Sept 15</option>
+            <option value="Encuentro Educación Cazada — TBD">Encuentro Educación Cazada — TBD</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guests">Number of Guests</label>
+          <input type="number" id="guests" name="guests" placeholder="1" min="1" max="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (000) 000-0000">
+        </div>
+
+        <div class="form-group full">
+          <label for="notes">Any notes or questions?</label>
+          <textarea id="notes" name="notes" placeholder="Dietary requirements, accessibility needs, questions…"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class="fas fa-paper-plane"></i> Register Now
+        </button>
+
+      </form>
+
+      <div class="form-message" id="formMessage"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 ARE. All Rights Reserved.</p>
+    <div class="footer-logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="calender.html">Calendar</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="Reservation.html">Reservations</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+    <p style="width:100%; text-align:center; margin-top:10px;">&copy; 2025 ARE — Strategic Communication. All rights reserved.</p>
   </footer>
 
+  <script>
+    // ─────────────────────────────────────────────
+    // EMAILJS SETUP
+    // 1. Create a free account at https://www.emailjs.com
+    // 2. Add an Email Service (Gmail, Outlook, etc.) → copy the Service ID
+    // 3. Create an Email Template → copy the Template ID
+    //    Use these variables in your template:
+    //      {{to_name}}     — registrant's full name
+    //      {{to_email}}    — registrant's email (set as "To Email" in template)
+    //      {{event_name}}  — selected event
+    //      {{guests}}      — number of guests
+    //      {{notes}}       — any notes
+    // 4. Copy your Public Key from Account → API Keys
+    // 5. Replace the three placeholder strings below
+    // ─────────────────────────────────────────────
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
+    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
 
-  
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hamburger / mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Form submission + EmailJS
+    document.getElementById('reservationForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('formMessage');
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const event     = document.getElementById('event').value;
+      const guests    = document.getElementById('guests').value;
+      const notes     = document.getElementById('notes').value.trim() || 'None';
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+      msg.className = 'form-message';
+
+      const templateParams = {
+        to_name:    `${firstName} ${lastName}`,
+        to_email:   email,
+        event_name: event,
+        guests:     guests,
+        notes:      notes,
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+
+        msg.className = 'form-message success';
+        msg.innerHTML = `<i class="fas fa-circle-check"></i> You're registered! A confirmation email has been sent to <strong>${email}</strong>.`;
+        this.reset();
+        btn.innerHTML = '<i class="fas fa-check"></i> Registered!';
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-paper-plane"></i> Register Now';
+        }, 4000);
+
+      } catch (err) {
+        console.error('EmailJS error:', err);
+        msg.className = 'form-message error';
+        msg.innerHTML = `<i class="fas fa-circle-exclamation"></i> Something went wrong. Please try again or contact us directly.`;
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Register Now';
+      }
+
+      msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  </script>
 </body>
 </html>
