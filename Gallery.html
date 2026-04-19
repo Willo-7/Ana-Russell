@@ -536,6 +536,109 @@
         </div>
       </div>
 
+
+      <div class="gallery-item" data-category="events" data-caption="New Event 1" onclick="openLightbox(4)">
+  <img src="PHOTO-2025-09-11-20-32-11.jpg" alt="New Event 1">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">New Event 1</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="team" data-caption="Team Moment" onclick="openLightbox(5)">
+  <img src="PHOTO-2025-09-13-23-46-21_1.jpg" alt="Team Moment">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">Team Moment</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="events" data-caption="New Event 1" onclick="openLightbox(4)">
+  <img src="C:\Users\wp851\Downloads\Ana Russell\f39b6df9-d62e-4676-bf4d-564dd80ec716.jpeg" alt="New Event 1">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">New Event 1</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="team" data-caption="Team Moment" onclick="openLightbox(5)">
+  <img src="d8cd57ea-3b92-49d8-9a03-a9effbfcea58.jpeg" alt="Team Moment">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">Team Moment</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="events" data-caption="New Event 1" onclick="openLightbox(4)">
+  <img src="4756ef80-4f91-413d-b80b-a7071e417931.jpeg" alt="New Event 1">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">New Event 1</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="team" data-caption="Team Moment" onclick="openLightbox(5)">
+  <img src="C:\Users\wp851\Downloads\Ana Russell\HOMENAJEADOS2025.jpeg" alt="Team Moment">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">Team Moment</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="gallery-item" data-category="events" data-caption="New Event 1" onclick="openLightbox(4)">
+  <img src="9362e8b1-4b9e-40c6-9527-456f0461283d.jpeg" alt="New Event 1">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">New Event 1</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="team" data-caption="Team Moment" onclick="openLightbox(5)">
+  <img src="875dba06-e31e-417f-92e2-c56d1968e9ec.jpeg" alt="Team Moment">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">Team Moment</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="events" data-caption="New Event 1" onclick="openLightbox(4)">
+  <img src="5a117106-ff7c-4acb-b655-a37ec41512d6.jpeg" alt="New Event 1">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">New Event 1</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-item" data-category="team" data-caption="Team Moment" onclick="openLightbox(5)">
+  <img src="75e7387b-60c8-4812-9c30-c74744efc057.jpeg" alt="Team Moment">
+  <div class="gallery-overlay">
+    <div class="overlay-content">
+      <span class="overlay-caption">Team Moment</span>
+      <div class="overlay-icon"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</div>
+5a117106-ff7c-4acb-b655-a37ec41512d6.jpeg
+
     </div>
   </section>
 
@@ -664,5 +767,15 @@
       if (e.key === 'ArrowRight') changeImage(1);
     });
   </script>
+
+ <script> function openLightboxFromElement(el) {
+  const items = [...document.querySelectorAll('.gallery-item')].filter(i => i.style.display !== 'none');
+  currentIndex = items.indexOf(el);
+  showImage(currentIndex);
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+</script>
+
 </body>
 </html>
