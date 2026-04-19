@@ -23,7 +23,6 @@
     body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
 
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
       padding: 18px 50px;
@@ -41,10 +40,8 @@
     .nav-links { display: flex; gap: 36px; align-items: center; }
     .nav-links a {
       font-family: 'Playfair Display', serif;
-      font-size: 0.95rem;
-      color: var(--green-dark);
-      letter-spacing: 0.02em;
-      position: relative;
+      font-size: 0.95rem; color: var(--green-dark);
+      letter-spacing: 0.02em; position: relative;
     }
     .nav-links a::after {
       content: ''; position: absolute; bottom: -3px; left: 0;
@@ -57,232 +54,94 @@
     .social-icons a { font-size: 1rem; color: var(--green-dark); transition: color 0.2s, transform 0.2s; }
     .social-icons a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
-    /* ── HAMBURGER ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      z-index: 1001;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px; height: 2px;
-      background: var(--green-dark);
-      border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 1001; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--green-dark); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ── MOBILE MENU ── */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      background: var(--green-dark);
-      padding: 80px 0 24px;
-      z-index: 998;
-      flex-direction: column;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; background: var(--green-dark); padding: 80px 0 24px; z-index: 998; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: rgba(255,255,255,0.9);
-      padding: 14px 32px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      transition: color 0.2s, padding-left 0.2s;
-    }
+    .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: rgba(255,255,255,0.9); padding: 14px 32px; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 0.2s, padding-left 0.2s; }
     .mobile-menu a:hover { color: var(--green-vivid); padding-left: 40px; }
     .mobile-menu a.active { color: var(--green-vivid); }
-    .mobile-menu .mobile-social {
-      display: flex;
-      gap: 20px;
-      padding: 20px 32px 0;
-    }
-    .mobile-menu .mobile-social a {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.6);
-      border: none;
-      padding: 0;
-      transition: color 0.2s;
-    }
+    .mobile-menu .mobile-social { display: flex; gap: 20px; padding: 20px 32px 0; }
+    .mobile-menu .mobile-social a { font-size: 1.1rem; color: rgba(255,255,255,0.6); border: none; padding: 0; transition: color 0.2s; }
     .mobile-menu .mobile-social a:hover { color: var(--green-vivid); }
 
-    /* ── PAGE HERO ── */
     .page-hero {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
-      padding: 160px 40px 100px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+      padding: 160px 40px 100px; color: #fff;
+      position: relative; overflow: hidden;
     }
     .page-hero::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse at 80% 40%, rgba(0,154,77,0.22), transparent 60%);
     }
     .page-hero::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 100%; height: 80px;
-      background: var(--cream);
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 100%; height: 80px; background: var(--cream);
       clip-path: ellipse(55% 100% at 50% 100%);
     }
-    .hero-inner {
-      position: relative; z-index: 1;
-      max-width: 760px;
-    }
+    .hero-inner { position: relative; z-index: 1; max-width: 760px; }
     .eyebrow {
-      display: inline-block;
-      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--green-light);
-      border: 1px solid rgba(212,237,224,0.4);
-      padding: 5px 14px; border-radius: 100px;
-      margin-bottom: 18px;
+      display: inline-block; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--green-light); border: 1px solid rgba(212,237,224,0.4);
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 18px;
     }
-    .page-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
-      font-weight: 700; line-height: 1.15;
-      margin-bottom: 20px;
-    }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
     .page-hero h1 em { font-style: italic; color: var(--green-light); }
-    .page-hero p {
-      color: rgba(255,255,255,0.75);
-      font-size: 1.1rem; line-height: 1.75;
-      max-width: 580px;
-    }
+    .page-hero p { color: rgba(255,255,255,0.75); font-size: 1.1rem; line-height: 1.75; max-width: 580px; }
 
-    /* ── MISSION SECTION ── */
     .mission-section {
-      padding: 100px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
+      padding: 100px 40px; max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
-    .mission-text .section-label {
-      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--green-vivid); font-weight: 500;
-      display: block; margin-bottom: 12px;
-    }
-    .mission-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      color: var(--green-dark);
-      margin-bottom: 20px;
-    }
-    .mission-text p {
-      color: var(--muted); font-size: 1.02rem; line-height: 1.8;
-      margin-bottom: 16px;
-    }
+    .mission-text .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-vivid); font-weight: 500; display: block; margin-bottom: 12px; }
+    .mission-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--green-dark); margin-bottom: 20px; }
+    .mission-text p { color: var(--muted); font-size: 1.02rem; line-height: 1.8; margin-bottom: 16px; }
     .divider { width: 40px; height: 2px; background: var(--green-vivid); margin: 20px 0 28px; }
-
-    .mission-image {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(13,61,43,0.15);
-      position: relative;
-    }
-    .mission-image img {
-      width: 100%; display: block;
-      transition: transform 0.5s ease;
-    }
+    .mission-image { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(13,61,43,0.15); position: relative; }
+    .mission-image img { width: 100%; display: block; transition: transform 0.5s ease; }
     .mission-image:hover img { transform: scale(1.04); }
     .mission-image .img-badge {
-      position: absolute;
-      bottom: 24px; left: 24px;
-      background: rgba(13,61,43,0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
+      position: absolute; bottom: 24px; left: 24px;
+      background: rgba(13,61,43,0.85); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15); color: #fff;
+      padding: 10px 18px; border-radius: 10px; font-size: 0.85rem;
+      font-family: 'Playfair Display', serif; font-style: italic;
     }
 
-    /* ── VIDEOS SECTION ── */
-    .videos-section {
-      padding: 100px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .videos-section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
     .videos-header { margin-bottom: 50px; }
-    .videos-header .section-label {
-      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--green-vivid); font-weight: 500;
-      display: block; margin-bottom: 10px;
-    }
-    .videos-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      color: var(--green-dark);
-      margin-bottom: 10px;
-    }
+    .videos-header .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-vivid); font-weight: 500; display: block; margin-bottom: 10px; }
+    .videos-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--green-dark); margin-bottom: 10px; }
     .videos-header p { color: var(--muted); max-width: 500px; }
 
-    .videos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
+    .videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
 
     .video-card {
-      background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
+      background: #fff; border-radius: 18px; overflow: hidden;
       box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-      opacity: 0;
-      transform: translateY(24px);
+      opacity: 0; transform: translateY(24px);
       transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s;
     }
     .video-card.visible { opacity: 1; transform: translateY(0); }
     .video-card:hover { transform: translateY(-5px); box-shadow: 0 16px 42px rgba(13,61,43,0.12); }
 
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-    }
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
+    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
     .video-thumb {
-      position: absolute;
-      inset: 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
+      position: absolute; inset: 0; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; z-index: 2;
     }
     .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .video-thumb .play-btn {
-      position: absolute;
-      width: 64px; height: 64px;
-      background: rgba(13,61,43,0.85);
-      border-radius: 50%;
+      position: absolute; width: 64px; height: 64px;
+      background: rgba(13,61,43,0.85); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 1.4rem;
-      backdrop-filter: blur(4px);
+      color: #fff; font-size: 1.4rem; backdrop-filter: blur(4px);
       border: 2px solid rgba(255,255,255,0.25);
       transition: transform 0.25s, background 0.25s;
     }
@@ -290,69 +149,29 @@
     .video-thumb .play-btn i { margin-left: 4px; }
 
     .video-info { padding: 22px 22px 26px; }
-    .video-info .video-tag {
-      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--green-vivid); font-weight: 500; margin-bottom: 8px;
-      display: block;
-    }
-    .video-info h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--green-dark);
-      margin-bottom: 8px;
-    }
+    .video-info .video-tag { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-vivid); font-weight: 500; margin-bottom: 8px; display: block; }
+    .video-info h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--green-dark); margin-bottom: 8px; }
     .video-info p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
 
-    /* ── CTA BANNER ── */
     .cta-banner {
       background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-dark) 100%);
-      padding: 90px 40px;
-      text-align: center;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+      padding: 90px 40px; text-align: center; color: #fff;
+      position: relative; overflow: hidden;
     }
-    .cta-banner::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 60%, rgba(0,154,77,0.2), transparent 55%);
-    }
+    .cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(0,154,77,0.2), transparent 55%); }
     .cta-banner .inner { position: relative; z-index: 1; }
-    .cta-banner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      margin-bottom: 16px;
-    }
+    .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 16px; }
     .cta-banner h2 em { font-style: italic; color: var(--green-light); }
     .cta-banner p { color: rgba(255,255,255,0.72); max-width: 480px; margin: 0 auto 32px; font-size: 1.05rem; }
-    .btn-primary {
-      display: inline-block;
-      background: var(--green-vivid); color: #fff;
-      padding: 13px 30px; border-radius: 8px;
-      font-weight: 500; font-size: 0.95rem;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-      box-shadow: 0 4px 18px rgba(0,154,77,0.35);
-      margin: 0 8px;
-    }
+    .btn-primary { display: inline-block; background: var(--green-vivid); color: #fff; padding: 13px 30px; border-radius: 8px; font-weight: 500; font-size: 0.95rem; transition: background 0.25s, transform 0.2s, box-shadow 0.25s; box-shadow: 0 4px 18px rgba(0,154,77,0.35); margin: 0 8px; }
     .btn-primary:hover { background: #fff; color: var(--green-dark); transform: translateY(-2px); }
-    .btn-ghost {
-      display: inline-block;
-      border: 1.5px solid rgba(255,255,255,0.4); color: #fff;
-      padding: 12px 28px; border-radius: 8px;
-      font-weight: 500; font-size: 0.95rem;
-      transition: background 0.25s, border-color 0.25s;
-      margin: 0 8px;
-    }
+    .btn-ghost { display: inline-block; border: 1.5px solid rgba(255,255,255,0.4); color: #fff; padding: 12px 28px; border-radius: 8px; font-weight: 500; font-size: 0.95rem; transition: background 0.25s, border-color 0.25s; margin: 0 8px; }
     .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
 
-    /* ── FOOTER ── */
     footer {
-      background: var(--green-dark);
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 40px 50px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
-      color: rgba(255,255,255,0.6); font-size: 0.88rem;
+      background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 40px 50px; display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px; color: rgba(255,255,255,0.6); font-size: 0.88rem;
     }
     footer .footer-logo img { height: 36px; filter: brightness(0) invert(1); opacity: 0.7; }
     footer .footer-links { display: flex; gap: 24px; }
@@ -362,23 +181,20 @@
     footer .footer-social a { color: rgba(255,255,255,0.6); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
     footer .footer-social a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .mission-section { grid-template-columns: 1fr; gap: 40px; }
       nav { padding: 14px 24px; }
       nav.scrolled { padding: 10px 24px; }
     }
     @media (max-width: 680px) {
-      .nav-links { display: none; }
-      .social-icons { display: none; }
+      .nav-links, .social-icons { display: none; }
       .hamburger { display: flex; }
       .videos-grid { grid-template-columns: 1fr; }
       .mission-section { padding: 70px 24px; }
       .videos-section { padding: 70px 24px; }
       .page-hero { padding: 120px 24px 80px; }
       .cta-banner { padding: 70px 24px; }
-      .cta-banner .btn-primary,
-      .cta-banner .btn-ghost { display: block; margin: 8px auto; width: fit-content; }
+      .cta-banner .btn-primary, .cta-banner .btn-ghost { display: block; margin: 8px auto; width: fit-content; }
       footer { flex-direction: column; text-align: center; align-items: center; padding: 32px 24px; }
       footer .footer-links { flex-wrap: wrap; justify-content: center; }
     }
@@ -397,8 +213,8 @@
       <a href="Reservation.html">Reservations</a>
     </div>
     <div class="social-icons">
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/arussellent_/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/arussell-enterprises/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -454,59 +270,50 @@
     </div>
     <div class="videos-grid">
 
-      <!-- VIDEO 1 -->
-<div class="video-card">
-  <div class="video-wrapper">
-    <div class="video-thumb" id="thumb-1" onclick="loadVideo('frame-1', 'qhQUxfefINQ', 'thumb-1')">
-      <img src="https://img.youtube.com/vi/qhQUxfefINQ/maxresdefault.jpg"
-           alt="Video thumbnail"
-           onerror="this.src='https://img.youtube.com/vi/qhQUxfefINQ/hqdefault.jpg'">
-      <div class="play-btn"><i class="fas fa-play"></i></div>
-    </div>
-    <iframe id="frame-1" src="" allowfullscreen loading="lazy" style="display:none;"></iframe>
-  </div>
-  <div class="video-info">
-    <span class="video-tag">Event Coverage</span>
-    <h3>4to Encuentro Comunicadoras NY</h3>
-    <p>A recap of our vibrant gathering celebrating the voices and stories of communicators in New York.</p>
-  </div>
-</div>
+      <div class="video-card">
+        <div class="video-wrapper">
+          <div class="video-thumb" id="thumb-1" onclick="loadVideo('frame-1', 'qhQUxfefINQ', 'thumb-1')">
+            <img src="https://img.youtube.com/vi/qhQUxfefINQ/maxresdefault.jpg" alt="Video thumbnail" onerror="this.src='https://img.youtube.com/vi/qhQUxfefINQ/hqdefault.jpg'">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <iframe id="frame-1" src="" allowfullscreen loading="lazy" style="display:none;"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Event Coverage</span>
+          <h3>4to Encuentro Comunicadoras NY</h3>
+          <p>A recap of our vibrant gathering celebrating the voices and stories of communicators in New York.</p>
+        </div>
+      </div>
 
-<!-- VIDEO 2 -->
-<div class="video-card">
-  <div class="video-wrapper">
-    <div class="video-thumb" id="thumb-2" onclick="loadVideo('frame-2', 'PASTE_ID_HERE', 'thumb-2')">
-      <img src="https://img.youtube.com/vi/PASTE_ID_HERE/maxresdefault.jpg"
-           alt="Video thumbnail"
-           onerror="this.src='https://img.youtube.com/vi/PASTE_ID_HERE/hqdefault.jpg'">
-      <div class="play-btn"><i class="fas fa-play"></i></div>
-    </div>
-    <iframe id="frame-2" src="" allowfullscreen loading="lazy" style="display:none;"></iframe>
-  </div>
-  <div class="video-info">
-    <span class="video-tag">Community</span>
-    <h3>Latin Women Empowered: Faces</h3>
-    <p>Highlights from an empowering evening honoring Latina leaders in business, media, and community.</p>
-  </div>
-</div>
+      <div class="video-card">
+        <div class="video-wrapper">
+          <div class="video-thumb" id="thumb-2" onclick="loadVideo('frame-2', 'PASTE_ID_HERE', 'thumb-2')">
+            <img src="https://img.youtube.com/vi/PASTE_ID_HERE/maxresdefault.jpg" alt="Video thumbnail" onerror="this.src='https://img.youtube.com/vi/PASTE_ID_HERE/hqdefault.jpg'">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <iframe id="frame-2" src="" allowfullscreen loading="lazy" style="display:none;"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Community</span>
+          <h3>Latin Women Empowered: Faces</h3>
+          <p>Highlights from an empowering evening honoring Latina leaders in business, media, and community.</p>
+        </div>
+      </div>
 
-<!-- VIDEO 3 -->
-<div class="video-card">
-  <div class="video-wrapper">
-    <div class="video-thumb" id="thumb-3" onclick="loadVideo('frame-3', 'PASTE_ID_HERE', 'thumb-3')">
-      <img src="https://img.youtube.com/vi/PASTE_ID_HERE/maxresdefault.jpg"
-           alt="Video thumbnail"
-           onerror="this.src='https://img.youtube.com/vi/PASTE_ID_HERE/hqdefault.jpg'">
-      <div class="play-btn"><i class="fas fa-play"></i></div>
-    </div>
-    <iframe id="frame-3" src="" allowfullscreen loading="lazy" style="display:none;"></iframe>
-  </div>
-  <div class="video-info">
-    <span class="video-tag">Media Feature</span>
-    <h3>ARE in the Media</h3>
-    <p>Watch our team and clients featured in television, press, and digital media spotlights.</p>
-  </div>
-</div>
+      <div class="video-card">
+        <div class="video-wrapper">
+          <div class="video-thumb" id="thumb-3" onclick="loadVideo('frame-3', 'PASTE_ID_HERE', 'thumb-3')">
+            <img src="https://img.youtube.com/vi/PASTE_ID_HERE/maxresdefault.jpg" alt="Video thumbnail" onerror="this.src='https://img.youtube.com/vi/PASTE_ID_HERE/hqdefault.jpg'">
+            <div class="play-btn"><i class="fas fa-play"></i></div>
+          </div>
+          <iframe id="frame-3" src="" allowfullscreen loading="lazy" style="display:none;"></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Media Feature</span>
+          <h3>ARE in the Media</h3>
+          <p>Watch our team and clients featured in television, press, and digital media spotlights.</p>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -532,30 +339,26 @@
       <a href="Reservation.html">Reservations</a>
     </div>
     <div class="footer-social">
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/arussellent_/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/arussell-enterprises/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
     </div>
     <p style="width:100%; text-align:center; margin-top:10px;">&copy; 2025 ARE — Strategic Communication. All rights reserved.</p>
   </footer>
 
   <script>
-    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Hamburger / mobile menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
       document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
     });
-
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
@@ -564,7 +367,6 @@
       });
     });
 
-    // Lazy-load YouTube
     function loadVideo(frameId, videoId, thumbId) {
       const frame = document.getElementById(frameId);
       const thumb = document.getElementById(thumbId);
@@ -573,7 +375,6 @@
       thumb.style.display = 'none';
     }
 
-    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -582,38 +383,8 @@
         }
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.video-card').forEach(el => observer.observe(el));
   </script>
-
-<div class="video-wrapper">
-  <div class="video-thumb" id="thumb-1"
-       onclick="loadVideo('frame-1', 'qhQUxfefINQ', 'thumb-1')">
-
-    <img src="https://img.youtube.com/vi/qhQUxfefINQ/maxresdefault.jpg"
-         onerror="this.src='https://img.youtube.com/vi/qhQUxfefINQ/hqdefault.jpg'">
-
-    <div class="play-btn">▶</div>
-  </div>
-
-  <iframe id="frame-1"
-          style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
-          allow="autoplay; encrypted-media"
-          allowfullscreen>
-  </iframe>
-</div>
-
-<script>
-function loadVideo(frameId, videoId, thumbId) {
-  const frame = document.getElementById(frameId);
-  const thumb = document.getElementById(thumbId);
-
-  frame.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
-  frame.style.display = "block";
-  thumb.style.display = "none";
-}
-</script>
-
 
 </body>
 </html>

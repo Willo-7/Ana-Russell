@@ -3,154 +3,449 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Event — ARE Strategic Communication</title>
+<title>4to Encuentro Comunicadoras NY — ARE Strategic Communication</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 <style>
-:root {
-  --green-dark:#0d3d2b;
-  --green-mid:#1a5c41;
-  --green-vivid:#009A4D;
-  --green-light:#d4ede0;
-  --cream:#f7f5f0;
-  --ink:#131310;
-  --muted:#5a5a52;
-}
+  :root {
+    --green-dark: #0d3d2b;
+    --green-mid: #1a5c41;
+    --green-vivid: #009A4D;
+    --green-light: #d4ede0;
+    --cream: #f7f5f0;
+    --off-white: #efefeb;
+    --ink: #131310;
+    --muted: #5a5a52;
+  }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
-a{text-decoration:none;color:inherit;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
 
-/* NAV */
-nav {
-  position:fixed; top:0; left:0; width:100%;
-  padding:18px 50px;
-  display:flex; justify-content:space-between; align-items:center;
-  z-index:999;
-  transition:0.3s;
-}
-nav.scrolled {
-  background:rgba(247,245,240,0.96);
-  backdrop-filter:blur(12px);
-}
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 18px 50px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 999;
+    transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(247,245,240,0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08), 0 6px 24px rgba(0,0,0,0.06);
+    padding: 12px 50px;
+  }
+  .logo img { height: 46px; object-fit: contain; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--green-dark);
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--green-vivid);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--green-vivid); }
+  .social-icons { display: flex; gap: 18px; }
+  .social-icons a { font-size: 1rem; color: var(--green-dark); transition: color 0.2s, transform 0.2s; }
+  .social-icons a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
-.logo img{height:46px;}
-.nav-links{display:flex;gap:36px;}
-.nav-links a{font-family:'Playfair Display';color:var(--green-dark);}
-.social-icons{display:flex;gap:18px;}
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--green-dark);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;}
-.hamburger span{width:22px;height:2px;background:var(--green-dark);}
+  /* ── MOBILE MENU ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    background: var(--green-dark);
+    padding: 80px 0 24px;
+    z-index: 998;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--green-vivid); padding-left: 40px; }
+  .mobile-menu .mobile-social {
+    display: flex;
+    gap: 20px;
+    padding: 20px 32px 0;
+  }
+  .mobile-menu .mobile-social a {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    border: none;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .mobile-menu .mobile-social a:hover { color: var(--green-vivid); }
 
-.mobile-menu{
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%;
-  background:var(--green-dark);
-  padding:80px 0;
-}
-.mobile-menu.open{display:flex;flex-direction:column;}
-.mobile-menu a{color:#fff;padding:14px 32px;}
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    padding: 160px 40px 100px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 40%, rgba(0,154,77,0.22), transparent 60%);
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 100%; height: 80px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 760px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-light);
+    border: 1px solid rgba(212,237,224,0.4);
+    padding: 5px 14px; border-radius: 100px;
+    margin-bottom: 18px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700; line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--green-light); }
+  .page-hero p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.1rem; line-height: 1.75;
+    max-width: 580px;
+  }
 
-/* HERO */
-.page-hero {
-  background:linear-gradient(135deg,var(--green-dark),var(--green-mid));
-  padding:160px 40px 100px;
-  color:#fff;
-}
-.page-hero h1 {
-  font-family:'Playfair Display';
-  font-size:3.5rem;
-}
-.page-hero p {
-  margin-top:12px;
-  color:rgba(255,255,255,0.75);
-}
+  /* ── EVENT META STRIP ── */
+  .event-meta-strip {
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 18px 40px;
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .meta-item i {
+    color: var(--green-vivid);
+    font-size: 0.9rem;
+  }
+  .meta-item strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
 
-/* SLIDER */
-.slider-section{
-  max-width:1100px;
-  margin:80px auto;
-  padding:0 30px;
-}
+  /* ── SLIDER SECTION ── */
+  .slider-section {
+    padding: 80px 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .slider-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(13,61,43,0.15);
+  }
+  .slider-track {
+    display: flex;
+    transition: transform 0.6s ease;
+  }
+  .slide { min-width: 100%; }
+  .slide img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+  }
+  .arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(13,61,43,0.85);
+    color: #fff;
+    border: none;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .arrow:hover { background: var(--green-vivid); transform: translateY(-50%) scale(1.08); }
+  .arrow.left { left: 20px; }
+  .arrow.right { right: 20px; }
 
-.slider-box{
-  position:relative;
-  overflow:hidden;
-  border-radius:20px;
-  box-shadow:0 20px 60px rgba(13,61,43,0.15);
-}
+  .slider-dots {
+    position: absolute;
+    bottom: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    padding: 0;
+  }
+  .dot.active { background: #fff; transform: scale(1.3); }
 
-.slider-track{
-  display:flex;
-  transition:transform 0.6s ease;
-}
+  /* ── CONTENT SECTION ── */
+  .content-section {
+    padding: 80px 40px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 80px;
+    align-items: start;
+  }
 
-.slide{min-width:100%;}
-.slide img{
-  width:100%;
-  height:520px;
-  object-fit:cover;
-}
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-vivid); font-weight: 500;
+    display: block; margin-bottom: 12px;
+  }
+  .content-main h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--green-dark);
+    margin-bottom: 20px;
+  }
+  .divider { width: 40px; height: 2px; background: var(--green-vivid); margin: 0 0 28px; }
 
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(13,61,43,0.85);
-  color:#fff;
-  border:none;
-  width:44px;height:44px;
-  border-radius:50%;
-  cursor:pointer;
-}
-.arrow.left{left:20px;}
-.arrow.right{right:20px;}
+  .content-main p {
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+  .content-main p strong { color: var(--ink); font-weight: 500; }
 
-/* DESCRIPTION */
-.event-description{
-  margin-top:40px;
-  max-width:750px;
-}
+  /* ── SIDEBAR ── */
+  .event-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+  .sidebar-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(13,61,43,0.08);
+    margin-bottom: 24px;
+  }
+  .sidebar-card-header {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    padding: 20px 22px;
+    color: #fff;
+  }
+  .sidebar-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .sidebar-card-header p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+  }
+  .sidebar-card-body { padding: 20px 22px; }
+  .honoree-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .honoree-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .honoree-list li::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-vivid);
+    flex-shrink: 0;
+  }
 
-.event-description h2{
-  font-family:'Playfair Display';
-  color:var(--green-dark);
-  margin-bottom:14px;
-}
+  .sidebar-organizer {
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 24px rgba(13,61,43,0.08);
+  }
+  .sidebar-organizer .section-label { margin-bottom: 14px; }
+  .org-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .org-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--green-dark);
+    flex-shrink: 0;
+  }
+  .org-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .org-role {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
 
-.event-description p{
-  color:var(--muted);
-  line-height:1.8;
-  margin-bottom:14px;
-}
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-dark) 100%);
+    padding: 90px 40px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(0,154,77,0.2), transparent 55%);
+  }
+  .cta-banner .inner { position: relative; z-index: 1; }
+  .cta-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+  .cta-banner h2 em { font-style: italic; color: var(--green-light); }
+  .cta-banner p { color: rgba(255,255,255,0.72); max-width: 480px; margin: 0 auto 32px; font-size: 1.05rem; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--green-vivid); color: #fff;
+    padding: 13px 30px; border-radius: 8px;
+    font-weight: 500; font-size: 0.95rem;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 4px 18px rgba(0,154,77,0.35);
+    margin: 0 8px;
+  }
+  .btn-primary:hover { background: #fff; color: var(--green-dark); transform: translateY(-2px); }
+  .btn-ghost {
+    display: inline-block;
+    border: 1.5px solid rgba(255,255,255,0.4); color: #fff;
+    padding: 12px 28px; border-radius: 8px;
+    font-weight: 500; font-size: 0.95rem;
+    transition: background 0.25s, border-color 0.25s;
+    margin: 0 8px;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
 
-/* FOOTER */
-footer{
-  background:var(--green-dark);
-  padding:40px;
-  color:#fff;
-  text-align:center;
-}
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-dark);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 40px 50px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+    color: rgba(255,255,255,0.6); font-size: 0.88rem;
+  }
+  footer .footer-logo img { height: 36px; filter: brightness(0) invert(1); opacity: 0.7; }
+  footer .footer-links { display: flex; gap: 24px; }
+  footer .footer-links a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+  footer .footer-links a:hover { color: var(--green-vivid); }
+  footer .footer-social { display: flex; gap: 16px; }
+  footer .footer-social a { color: rgba(255,255,255,0.6); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
+  footer .footer-social a:hover { color: var(--green-vivid); transform: translateY(-2px); }
 
-/* MOBILE */
-@media(max-width:700px){
-  .nav-links,.social-icons{display:none;}
-  .hamburger{display:flex;}
-  .slide img{height:300px;}
-}
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .content-section { grid-template-columns: 1fr; gap: 50px; }
+    .event-sidebar { position: static; }
+  }
+  @media (max-width: 680px) {
+    .nav-links, .social-icons { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 14px 24px; }
+    nav.scrolled { padding: 10px 24px; }
+    .page-hero { padding: 120px 24px 80px; }
+    .slider-section { padding: 60px 24px 0; }
+    .slide img { height: 260px; }
+    .content-section { padding: 60px 24px 80px; }
+    .event-meta-strip { padding: 16px 24px; gap: 20px; }
+    .cta-banner { padding: 70px 24px; }
+    .cta-banner .btn-primary,
+    .cta-banner .btn-ghost { display: block; margin: 8px auto; width: fit-content; }
+    footer { flex-direction: column; text-align: center; align-items: center; padding: 32px 24px; }
+    footer .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
 </style>
 </head>
-
 <body>
 
 <!-- NAV -->
 <nav id="navbar">
-  <div class="logo"><img src="ARussell logo updated .png"></div>
-
+  <div class="logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -158,120 +453,231 @@ footer{
     <a href="gallery.html">Gallery</a>
     <a href="Reservation.html">Reservations</a>
   </div>
-
   <div class="social-icons">
-    <a href="https://www.instagram.com/arussellent_/"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.linkedin.com/company/arussell-enterprises/"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.instagram.com/arussellent_/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/company/arussell-enterprises/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
   </div>
-
-  <button class="hamburger" id="hamburger">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE -->
+<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
+  <a href="calender.html">Calendar</a>
   <a href="gallery.html">Gallery</a>
+  <a href="Reservation.html">Reservations</a>
+  <div class="mobile-social">
+    <a href="https://www.instagram.com/arussellent_/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/company/arussell-enterprises/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  </div>
 </div>
 
-<!-- HERO -->
+<!-- PAGE HERO -->
 <section class="page-hero">
-  <h1>4to Encuentro Comunicadoras NY</h1>
-  <p>Celebrating voices, stories, and leadership in communication.</p>
+  <div class="hero-inner">
+    <span class="eyebrow">Event Coverage</span>
+    <h1>4to Encuentro<br><em>Comunicadoras NY</em></h1>
+    <p>Celebrating voices, stories, and leadership in communication — a night of recognition, memory, and purpose.</p>
+  </div>
 </section>
 
-<!-- SLIDER -->
-<section class="slider-section">
+<!-- EVENT META STRIP -->
+<div style="background:#fff; border-bottom:1px solid rgba(0,0,0,0.06);">
+  <div class="event-meta-strip">
+    <div class="meta-item">
+      <i class="far fa-calendar"></i>
+      <span><strong>2025</strong> &nbsp;·&nbsp; New York City</span>
+    </div>
+    <div class="meta-item">
+      <i class="fas fa-map-marker-alt"></i>
+      <span>Dirección de Cultura Dominicana en el Exterior</span>
+    </div>
+    <div class="meta-item">
+      <i class="fas fa-building"></i>
+      <span>Organized by <strong>ARussell Enterprises</strong></span>
+    </div>
+  </div>
+</div>
 
+<!-- PHOTO SLIDER -->
+<section class="slider-section">
   <div class="slider-box">
     <div class="slider-track" id="sliderTrack">
+      <div class="slide"><img src="ecb807d1-6249-4c80-a3b2-3c90cc6aab6b.jpeg" alt="Encuentro Comunicadoras 2025"></div>
+      <div class="slide"><img src="89e3d897-fd04-4031-927c-ffa587774058.jpeg" alt="Encuentro Comunicadoras 2025"></div>
+      <div class="slide"><img src="eafa6207-f3dc-45aa-9e82-ae59a7b27997.jpeg" alt="Encuentro Comunicadoras 2025"></div>
+    </div>
+    <button class="arrow left" onclick="prevSlide()" aria-label="Previous">&#10094;</button>
+    <button class="arrow right" onclick="nextSlide()" aria-label="Next">&#10095;</button>
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+</section>
 
-      <div class="slide">
-        <img src="ecb807d1-6249-4c80-a3b2-3c90cc6aab6b.jpeg">
+<!-- CONTENT + SIDEBAR -->
+<section class="content-section">
+
+  <div class="content-main">
+    <span class="section-label">Event Recap</span>
+    <h2>About the Event</h2>
+    <div class="divider"></div>
+
+    <p><strong>New York.</strong> – Con una mezcla de emoción, memoria y propósito, el 4to Encuentro de Comunicadoras 2025 reunió a voces destacadas de la comunicación, la cultura y la comunidad en la sede de la Dirección de Cultura Dominicana en el Exterior, reafirmando el poder transformador de la palabra.</p>
+
+    <p>La noche inició con un cóctel de bienvenida, seguido por una apertura musical a cargo del cantautor Seye. Con la conducción de Tiaris Cabrera, el evento centró su atención en reconocer la trayectoria y el aporte de comunicadoras, periodistas y figuras clave de la diáspora.</p>
+
+    <p>En el Encuentro de Comunicadoras fueron reconocidos Ramón Almanzar, Lissette Montolío, Lourdes Stephen, Deyanira Martínez, Robmariel Olea, Eddy Heredia, Jackie Contreras y Ramón Ramírez (Mister Dj1).</p>
+
+    <p>Los reconocimientos fueron entregados por el congresista Adriano Espaillat, el asambleísta Manny De los Santos y la concejal Carmen De la Rosa, representada por la líder comunitaria Nuris De Oleo, pilar propulsor del encuentro. También se distinguió homenaje a Cristina Echevarría y Mírtica de Perales, por preservar el legado empresarial y cultural de Mirta de Perales.</p>
+
+    <p>Durante sus intervenciones, Espaillat y De los Santos resaltaron el valor de estos espacios para visibilizar la labor de la diáspora dominicana en Nueva York.</p>
+
+    <p>Uno de los momentos más significativos fue el panel sobre salud mental, liderado por el Dr. Miguel Contreras, el actor Manny Pérez y Robmariel Olea, quienes abordaron con honestidad los desafíos emocionales que enfrentan quienes comunican desde la comunidad.</p>
+
+    <p>Asimismo, Rhadamés Ávila, director de la Fundación Los Hijos de María, realizó una significativa donación de 100 pares de zapatos para niños en República Dominicana, a través de Educación Calzada, impulsado por la periodista Xiomara Taveras, fundadora del Encuentro de Comunicadoras.</p>
+
+    <p>Junto a ella, dieron la bienvenida las comunicadoras Ana Russell, Jennifer Mercedes y Angie Jérez.</p>
+
+    <p>El evento, organizado por ARussell Enterprises, también rindió tributo póstumo a comunicadores fallecidos que dejaron un legado invaluable en los medios comunitarios, así como a las víctimas de la tragedia del Jet Set, recordadas con respeto y solidaridad.</p>
+
+    <p>La noche cerró con un emotivo homenaje al merenguero Rubby Pérez, con presentaciones de Alexandra Corsino, Valentín Mesa, Ninoshka, Mayra Bello y participación especial de Robmariel Olea, celebrando su legado musical.</p>
+
+    <p><strong>El 4to Encuentro de Comunicadoras 2025 fue un espacio de afirmación, memoria y reconocimiento, donde la voz comprometida de los comunicadores brilló con fuerza y propósito.</strong></p>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="event-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <h3>Honorees 2025</h3>
+        <p>Recognized at the ceremony</p>
       </div>
-
-      <div class="slide">
-        <img src="89e3d897-fd04-4031-927c-ffa587774058.jpeg">
+      <div class="sidebar-card-body">
+        <ul class="honoree-list">
+          <li>Ramón Almanzar</li>
+          <li>Lissette Montolío</li>
+          <li>Lourdes Stephen</li>
+          <li>Deyanira Martínez</li>
+          <li>Robmariel Olea</li>
+          <li>Eddy Heredia</li>
+          <li>Jackie Contreras</li>
+          <li>Ramón Ramírez (Mister Dj1)</li>
+          <li>Cristina Echevarría</li>
+          <li>Mírtica de Perales</li>
+        </ul>
       </div>
-
-      <div class="slide">
-        <img src="eafa6207-f3dc-45aa-9e82-ae59a7b27997.jpeg">
-      </div>
-
     </div>
 
-    <button class="arrow left" onclick="prevSlide()">&#10094;</button>
-    <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+    <div class="sidebar-organizer">
+      <span class="section-label">Host &amp; Organizers</span>
+      <div class="org-item">
+        <div class="org-avatar">AR</div>
+        <div>
+          <div class="org-name">Ana Russell</div>
+          <div class="org-role">ARussell Enterprises</div>
+        </div>
+      </div>
+      <div class="org-item">
+        <div class="org-avatar">XT</div>
+        <div>
+          <div class="org-name">Xiomara Taveras</div>
+          <div class="org-role">Founder, Encuentro de Comunicadoras</div>
+        </div>
+      </div>
+      <div class="org-item">
+        <div class="org-avatar">TC</div>
+        <div>
+          <div class="org-name">Tiaris Cabrera</div>
+          <div class="org-role">MC / Host</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="inner">
+    <h2>See More of Our <em>Work &amp; Events</em></h2>
+    <p>Explore our gallery, upcoming events, and how ARE brings community stories to life.</p>
+    <a href="gallery.html" class="btn-primary">View Gallery</a>
+    <a href="calender.html" class="btn-ghost">Upcoming Events</a>
   </div>
-
-  <!-- DESCRIPTION -->
-  <div class="event-description">
-    <h2>About the Event</h2>
-    <div class="event-description">
-  <h2>About the Event</h2>
-
-  <p><strong>New York.</strong> – Con una mezcla de emoción, memoria y propósito, el 4to Encuentro de Comunicadoras 2025 reunió a voces destacadas de la comunicación, la cultura y la comunidad en la sede de la Dirección de Cultura Dominicana en el Exterior, reafirmando el poder transformador de la palabra.</p>
-
-  <p>La noche inició con un cóctel de bienvenida, seguido por una apertura musical a cargo del cantautor Seye. Con la conducción de Tiaris Cabrera, el evento centró su atención en reconocer la trayectoria y el aporte de comunicadoras, periodistas y figuras clave de la diáspora.</p>
-
-  <p>En el Encuentro de Comunicadoras fueron reconocidos Ramón Almanzar, Lissette Montolío, Lourdes Stephen, Deyanira Martínez, Robmariel Olea, Eddy Heredia, Jackie Contreras y Ramón Ramírez (Mister Dj1).</p>
-
-  <p>Los reconocimientos fueron entregados por el congresista Adriano Espaillat, el asambleísta Manny De los Santos y la concejal Carmen De la Rosa, representada por la líder comunitaria Nuris De Oleo, pilar propulsor del encuentro. También se distinguió homenaje a Cristina Echevarría y Mírtica de Perales, por preservar el legado empresarial y cultural de Mirta de Perales.</p>
-
-  <p>Durante sus intervenciones, Espaillat y De los Santos resaltaron el valor de estos espacios para visibilizar la labor de la diáspora dominicana en Nueva York.</p>
-
-  <p>Uno de los momentos más significativos fue el panel sobre salud mental, liderado por el Dr. Miguel Contreras, el actor Manny Pérez y Robmariel Olea, quienes abordaron con honestidad los desafíos emocionales que enfrentan quienes comunican desde la comunidad.</p>
-
-  <p>Asimismo, Rhadamés Ávila, director de la Fundación Los Hijos de María, realizó una significativa donación de 100 pares de zapatos para niños en República Dominicana, a través de Educación Calzada, impulsado por la periodista Xiomara Taveras, fundadora del Encuentro de Comunicadoras.</p>
-
-  <p>Junto a ella, dieron la bienvenida las comunicadoras Ana Russell, Jennifer Mercedes y Angie Jérez.</p>
-
-  <p>El evento, organizado por ARussell Enterprises, también rindió tributo póstumo a comunicadores fallecidos que dejaron un legado invaluable en los medios comunitarios, así como a las víctimas de la tragedia del Jet Set, recordadas con respeto y solidaridad.</p>
-
-  <p>La noche cerró con un emotivo homenaje al merenguero Rubby Pérez, con presentaciones de Alexandra Corsino, Valentín Mesa, Ninoshka, Mayra Bello y participación especial de Robmariel Olea, celebrando su legado musical.</p>
-
-  <p><strong>El 4to Encuentro de Comunicadoras 2025 fue un espacio de afirmación, memoria y reconocimiento, donde la voz comprometida de los comunicadores brilló con fuerza y propósito.</strong></p>
-</div>
-  </div>
-
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 ARE Strategic Communication</p>
+  <div class="footer-logo"><img src="ARussell logo updated .png" alt="ARE Logo"></div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="calender.html">Calendar</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="Reservation.html">Reservations</a>
+  </div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/arussellent_/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/company/arussell-enterprises/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  </div>
+  <p style="width:100%; text-align:center; margin-top:10px;">&copy; 2025 ARE — Strategic Communication. All rights reserved.</p>
 </footer>
 
 <script>
-// NAV scroll
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('scrolled',window.scrollY>60);
-});
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
 
-// mobile menu
-const hamburger=document.getElementById('hamburger');
-const mobileMenu=document.getElementById('mobileMenu');
+  // Hamburger / mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
 
-hamburger.onclick=()=>{
-  mobileMenu.classList.toggle('open');
-};
+  // Slider
+  let index = 0;
+  const track = document.getElementById('sliderTrack');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  const dotsContainer = document.getElementById('sliderDots');
 
-// SLIDER
-let index=0;
-const track=document.getElementById("sliderTrack");
-const total=document.querySelectorAll(".slide").length;
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => showSlide(i));
+    dotsContainer.appendChild(dot);
+  });
 
-function showSlide(i){
-  index=(i+total)%total;
-  track.style.transform=`translateX(-${index*100}%)`;
-}
-function nextSlide(){showSlide(index+1);}
-function prevSlide(){showSlide(index-1);}
+  function showSlide(i) {
+    index = (i + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, di) => {
+      d.classList.toggle('active', di === index);
+    });
+  }
+  function nextSlide() { showSlide(index + 1); }
+  function prevSlide() { showSlide(index - 1); }
 
-setInterval(()=>nextSlide(),5000);
+  setInterval(() => nextSlide(), 5000);
 </script>
-
 </body>
 </html>
