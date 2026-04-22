@@ -86,7 +86,6 @@
       background: linear-gradient(160deg, rgba(13,61,43,0.72) 0%, rgba(0,0,0,0.42) 50%, rgba(13,61,43,0.68) 100%);
     }
 
-    /* Decorative corner ornaments */
     .hero::before {
       content: '';
       position: absolute; top: 80px; left: 40px;
@@ -148,7 +147,6 @@
     }
     .btn-ghost-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.8); }
 
-    /* hero stats bar */
     .hero-stats {
       position: absolute; bottom: 0; left: 0; width: 100%; z-index: 3;
       display: flex; justify-content: center;
@@ -254,7 +252,6 @@
     }
     .btn-outline-white:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
 
-    /* Event slider */
     .event-slider-wrap { position: relative; }
     .event-slider { display: flex; gap: 24px; overflow: hidden; }
 
@@ -270,7 +267,6 @@
     }
     .upcoming-card:hover { transform: translateY(-4px); border-color: rgba(0,154,77,0.4); }
 
-    /* TBA card special style */
     .upcoming-card.tba {
       background: linear-gradient(135deg, rgba(0,154,77,0.08), rgba(13,61,43,0.3));
       border: 1px dashed rgba(0,154,77,0.35);
@@ -285,7 +281,6 @@
       display: flex; align-items: center; justify-content: center;
     }
 
-    /* TBA placeholder art */
     .tba-art {
       width: 100%; height: 100%;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -404,10 +399,28 @@
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
     .team-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.07); transition: transform 0.3s, box-shadow 0.3s; }
     .team-card:hover { transform: translateY(-6px); box-shadow: 0 16px 42px rgba(13,61,43,0.12); }
-    .team-card .photo-wrap { height: 260px; overflow: hidden; position: relative; }
-    .team-card .photo-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+
+    /* ── TEAM PHOTO FIX ── */
+    /* Fixed height, anchor to top so heads are never cropped */
+    .team-card .photo-wrap {
+      height: 300px;        /* slightly taller for more breathing room */
+      overflow: hidden;
+      position: relative;
+    }
+    .team-card .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center; /* <-- KEY FIX: show the top (face/head) of each photo */
+      transition: transform 0.5s ease;
+    }
     .team-card:hover .photo-wrap img { transform: scale(1.05); }
-    .team-card .photo-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, rgba(13,61,43,0.6), transparent); }
+    .team-card .photo-wrap::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 50%;
+      background: linear-gradient(to top, rgba(13,61,43,0.55), transparent);
+    }
+
     .team-info { padding: 22px 22px 26px; }
     .team-info h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--green-dark); margin-bottom: 8px; }
     .team-info p { color: var(--muted); font-size: 0.89rem; line-height: 1.6; }
@@ -442,6 +455,7 @@
       .about-sponsors-inner { grid-template-columns: 1fr; gap: 50px; }
       .upcoming-card { min-width: calc(80% - 12px); }
     }
+
     @media (max-width: 680px) {
       .nav-links, .social-icons { display: none; }
       .hamburger { display: flex; }
@@ -453,6 +467,36 @@
       footer { flex-direction: column; text-align: center; align-items: center; padding: 32px 24px; }
       footer .footer-links { flex-wrap: wrap; justify-content: center; }
       .hero-stats-inner { justify-content: center; gap: 30px; }
+
+      /* Mobile team grid: 2 columns, shorter cards */
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .team-card .photo-wrap {
+        height: 200px; /* shorter on mobile to avoid overflow */
+      }
+      .team-info {
+        padding: 14px 14px 18px;
+      }
+      .team-info h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+      .team-info p {
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+    }
+
+    /* Very small screens: single column team */
+    @media (max-width: 400px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .team-card .photo-wrap {
+        height: 240px;
+      }
     }
   </style>
 </head>
@@ -582,7 +626,7 @@
     </div>
   </section>
 
-  <!-- ── UPCOMING EVENTS ── -->
+  <!-- UPCOMING EVENTS -->
   <section class="upcoming-section" id="upcoming">
     <div class="upcoming-inner">
       <div class="upcoming-header">
@@ -596,7 +640,6 @@
       <div class="event-slider-wrap">
         <div class="event-slider" id="upcomingSlider">
 
-          <!-- TBA Card 1 -->
           <div class="upcoming-card tba">
             <div class="card-img placeholder">
               <div class="tba-art">
@@ -618,7 +661,6 @@
             </div>
           </div>
 
-          <!-- TBA Card 2 -->
           <div class="upcoming-card tba">
             <div class="card-img placeholder">
               <div class="tba-art">
@@ -640,7 +682,6 @@
             </div>
           </div>
 
-          <!-- TBA Card 3 — generic placeholder for future events -->
           <div class="upcoming-card tba">
             <div class="card-img placeholder">
               <div class="tba-art">
